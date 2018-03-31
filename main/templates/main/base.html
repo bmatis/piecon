@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PieCon</title>
+  </head>
+
+  <body>
+    <nav>
+      <ul>
+        <li><a href="{% url 'main:index' %}">PieCon</a></li>
+        <li><a href="{% url 'main:games' %}">Games</a></li>
+        <li><a href="{% url 'main:pies' %}">Pies</a></li>
+        <li><a href="{% url 'main:volunteer' %}">Volunteer</a></li>
+        <li><a href="{% url 'main:about' %}">About</a></li>
+      </ul>
+    </nav>
+
+    {% block content %} {% endblock content %}
+  </body>

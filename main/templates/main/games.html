@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<h1>Games</h1>
+
+<ul>
+  {% for game in games %}
+    <li>
+      <p><strong>{{ game.title }}</strong></p>
+      <p>Run by: {{ game.gamemaster }}</p>
+      <p>System: {{ game.system }}</p>
+      <p>Number of Player: {{ game.num_players }}</p>
+      <p>Length: {{ game.length }} hour(s)</p>
+      <p>Description:</p>
+      <p>{{ game.description }}</p>
+    </li>
+  {% empty %}
+    <li>No games registered</li>
+  {% endfor %}
+</ul>
+
+{% endblock content %}
