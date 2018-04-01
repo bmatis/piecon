@@ -21,7 +21,12 @@
 
 <ul>
   {% for pie in pies %}
-    <li><strong>{{pie.owner}}</strong> is bringing <strong>{{pie}}</strong>!</li>
+    <li><strong>{{pie.owner}}</strong> is bringing <strong>{{pie}}</strong>!
+    {% if pie.owner == request.user %}
+    <a href="{% url 'main:edit_pie' pie.id %}">
+      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      edit</a></li>
+    {% endif %}
   {% endfor %}
 </ul>
 

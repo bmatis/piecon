@@ -25,6 +25,27 @@ def pies(request):
     return render(request, 'main/pies.html', context)
 
 @login_required
+def edit_pie(request, pie_id):
+    """Page for editing a pie."""
+
+    pie = Pie.objects.get(id=pie_id)
+    if pie.owner != request.user:
+        raise Http404
+
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current entry.
+        form = PieForm(instance=pie)
+    else:
+        # POST data submitted; process data.
+        form = PieForm(instance=pie, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('main:pies'))
+
+    context = {'pie': pie, 'form': form}
+    return render(request, 'main/edit_pie.html', context)
+
+@login_required
 def new_pie(request):
     """Add a new pie."""
     if request.method != 'POST':
