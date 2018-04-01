@@ -6,4 +6,4 @@ from django.contrib.auth import logout
 def logout_view(request):
     """Log the user out."""
     logout(request)
-    return HttpResponseRedirect(reverse('main:index'))
+    return HttpResponseRedirect(reverse('users:login'))
