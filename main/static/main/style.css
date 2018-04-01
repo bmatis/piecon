@@ -61,6 +61,10 @@ body {
   background: orange;
 }
 
+.navbar-default .navbar-nav > li > p.navbar-text {
+  color: white;
+}
+
 /* Navigation: Links */
 .navbar-default .navbar-nav > li > a {
     color: white;
