@@ -13,19 +13,26 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Login</h3>
+          <h3 class="panel-title">
+            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+            &nbsp;Login</h3>
         </div>
         <div class="panel-body">
           <form method="post" action="{% url 'users:login' %}">
             {% csrf_token %}
             {% bootstrap_form form %}
             {% buttons %}
-              <button name="submit" class="btn btn-primary">Log In</button>
+              <button name="submit" class="btn btn-primary">Login</button>
             {% endbuttons %}
             <input type="hidden" name="next" value="{% url 'main:index' %}" />
           </form>
         </div>
       </div>
+      <p class="text-left">
+        <a href="#">Forgot password</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a href="#">Make an account</a>
+      </p>
     </div>
 
     <div class="col-md-4">

@@ -56,7 +56,8 @@ body {
   font-size: 26px
 }
 
-.navbar-default .navbar-brand:hover {
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
   color: white;
   background: orange;
 }
