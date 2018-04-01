@@ -13,8 +13,34 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 60px; /* provide space for fixed top nav */
   color: #444;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 90px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  padding: 20px 0;
+  /* line-height: 60px; /* Vertically center the text there */
+  background-color: #222;
+}
+.footer span {
+  color: #aaa
+}
+.footer span a {
+  color: #ddd
 }
 
 /* Navigation */
@@ -27,7 +53,7 @@ body {
 .navbar-default .navbar-brand {
   color: white;
   font-family: 'Bangers', cursive;
-  font-size: 24px
+  font-size: 26px
 }
 
 .navbar-default .navbar-brand:hover {
