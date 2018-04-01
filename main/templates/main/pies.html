@@ -1,13 +1,21 @@
 {% extends 'main/base.html' %}
+{% block title %}PieCon | Pies{% endblock title %}
 
 {% block content %}
 
 <h1>Pies</h1>
+{% if pies.count == 0 %}
+  <p>No pies registered yet...</p>
+{% elif pies.count == 1 %}
+  <p>{{ pies.count }} pie registered!</p>
+{% elif pies.count > 1 %}
+  <p>{{ pies.count }} pies registered!</p>
+{% endif %}
+
 <ul>
   {% for pie in pies %}
     <li><strong>{{pie.text}}</strong> brought by <strong>{{pie.owner}}</strong>!</li>
-  {% empty %}
-    <li>No pies registered</li>
   {% endfor %}
+</ul>
 
 {% endblock content %}

@@ -1,8 +1,15 @@
 {% extends 'main/base.html' %}
-
+{% block title %}PieCon | Games{% endblock title %}
 {% block content %}
 
 <h1>Games</h1>
+{% if games.count == 0 %}
+  <p>No games registered yet...</p>
+{% elif games.count == 1 %}
+  <p>{{ games.count }} game registered!</p>
+{% elif games.count > 1 %}
+  <p>{{ games.count }} games registered!</p>
+{% endif %}
 
 <ul>
   {% for game in games %}
@@ -15,8 +22,6 @@
       <p>Description:</p>
       <p>{{ game.description }}</p>
     </li>
-  {% empty %}
-    <li>No games registered</li>
   {% endfor %}
 </ul>
 

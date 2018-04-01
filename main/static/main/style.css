@@ -1,0 +1,67 @@
+/* ------------------------
+   Colors
+
+   Burnt Orange: #dc6809
+   Light Orange: orange
+   Dark orange/red: #8d3602
+
+   ------------------------ */
+
+html {
+  -webkit-font-smoothing: antialiased;
+	text-rendering: optimizelegibility;
+}
+
+body {
+  padding-top: 60px;
+  color: #444;
+}
+
+/* Navigation */
+.navbar-default, .navbar-default {
+	background: #dc6809;
+  border-color: orange;
+  color: white;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+  font-family: 'Bangers', cursive;
+  font-size: 24px
+}
+
+.navbar-default .navbar-brand:hover {
+  color: white;
+  background: orange;
+}
+
+/* Navigation: Links */
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: white;
+    background: orange;
+}
+
+/* Navigation: Mobile version */
+.navbar-default .navbar-toggle {
+    border-color: orange;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: orange;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+          color: #333;
+    }
+}
