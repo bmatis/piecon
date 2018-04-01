@@ -13,4 +13,7 @@ urlpatterns = [
 
     # Logout action
     path('logout/', views.logout_view, name='logout'),
+
+    # Create a new account
+    path('new_account/', views.new_account, name='new_account')
 ]

@@ -24,14 +24,18 @@
             {% buttons %}
               <button name="submit" class="btn btn-primary">Login</button>
             {% endbuttons %}
-            <input type="hidden" name="next" value="{% url 'main:index' %}" />
+            {% if next %}
+              <input type="hidden" name="next" value="{{next}}" />
+            {% else %}
+              <input type="hidden" name="next" value="{% url 'main:index' %}" />
+            {% endif %}
           </form>
         </div>
       </div>
-      <p class="text-left">
+      <p class="text-center">
         <a href="#">Forgot password</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a href="#">Make an account</a>
+        <a href="{% url 'users:new_account' %}">Make an account</a>
       </p>
     </div>
 

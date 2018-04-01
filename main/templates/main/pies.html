@@ -1,9 +1,16 @@
 {% extends 'main/base.html' %}
 {% block title %}PieCon | Pies{% endblock title %}
 
+{% block header %}
+  <h2>Pie Registry</h2>
+  <h2><a href="{% url 'main:new_pie' %}" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Register a new pie
+  </a></h2>
+{% endblock header %}
+
 {% block content %}
 
-<h1>Pies</h1>
 {% if pies.count == 0 %}
   <p>No pies registered yet...</p>
 {% elif pies.count == 1 %}
@@ -14,7 +21,7 @@
 
 <ul>
   {% for pie in pies %}
-    <li><strong>{{pie.text}}</strong> brought by <strong>{{pie.owner}}</strong>!</li>
+    <li><strong>{{pie.owner}}</strong> is bringing <strong>{{pie}}</strong>!</li>
   {% endfor %}
 </ul>
 

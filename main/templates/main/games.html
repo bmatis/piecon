@@ -1,8 +1,13 @@
 {% extends 'main/base.html' %}
 {% block title %}PieCon | Games{% endblock title %}
+
+{% block header %}
+  <h2>Game Registry</h2>
+{% endblock header %}
+
 {% block content %}
 
-<h1>Games</h1>
+
 {% if games.count == 0 %}
   <p>No games registered yet...</p>
 {% elif games.count == 1 %}

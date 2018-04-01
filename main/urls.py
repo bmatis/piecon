@@ -16,6 +16,9 @@ urlpatterns = [
     # Page for showing all pies.
     path('pies/', views.pies, name='pies'),
 
+    # Page for adding a new pie.
+    path('pies/new_pie/', views.new_pie, name='new_pie'),
+
     # About page
     path('about/', views.about, name='about'),
 

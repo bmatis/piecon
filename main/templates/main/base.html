@@ -44,7 +44,7 @@
                 Logout</a></li>
             {% else %}
               <li>
-                <a href="#">
+                <a href="{% url 'users:new_account' %}">
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
                   Create Account
                 </a>
@@ -62,6 +62,12 @@
 
       </div>
     </nav>
+
+    <div class="container">
+      <div class="page-header">
+        {% block header %} {% endblock header %}
+      </div>
+    </div>
 
     <div class="container">
       {% block content %} {% endblock content %}

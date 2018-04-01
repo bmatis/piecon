@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from .models import Pie
-from .models import Game
+from django.urls import reverse
+from django.http import HttpResponseRedirect, Http404
+from django.contrib.auth.decorators import login_required
+
+from .models import Pie, Game
+from .forms import PieForm
 
 current_year = 2018
 
@@ -19,6 +23,25 @@ def pies(request):
     pies = Pie.objects.filter(date_added__year=current_year).order_by('-date_added')
     context = {'pies': pies}
     return render(request, 'main/pies.html', context)
+
+@login_required
+def new_pie(request):
+    """Add a new pie."""
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = PieForm()
+    else:
+        # POST data submitted; process data.
+        form = PieForm(request.POST)
+        if form.is_valid():
+            new_pie = form.save(commit=False)
+            new_pie.owner = request.user
+            new_pie.save()
+            return HttpResponseRedirect(reverse('main:pies'))
+
+    context = {'form': form}
+    return render(request, 'main/new_pie.html', context)
+
 
 def about(request):
     """The about page for the PieCon site."""
