@@ -46,7 +46,8 @@ body {
 /* Navigation */
 .navbar-default, .navbar-default {
 	background: #dc6809;
-  border-color: orange;
+  border-width: 0px;
+  border-color: #dc6809;
   color: white;
 }
 
@@ -74,6 +75,7 @@ body {
 .navbar-default .navbar-nav > li > a:hover {
     color: white;
     background: orange;
+    border-color: orange;
 }
 
 .navbar-default .navbar-nav > .active > a,
