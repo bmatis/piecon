@@ -30,10 +30,10 @@
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="{% url 'main:games' %}">Games</a></li>
-            <li><a href="{% url 'main:pies' %}">Pies</a></li>
-            <li><a href="{% url 'main:volunteer' %}">Volunteer</a></li>
-            <li><a href="{% url 'main:about' %}">About</a></li>
+            <li class="{% block games_active %}{% endblock %}"><a href="{% url 'main:games' %}">Games</a></li>
+            <li class="{% block pies_active %}{% endblock %}"><a href="{% url 'main:pies' %}">Pies</a></li>
+            <li class="{% block volunteer_active %}{% endblock %}"><a href="{% url 'main:volunteer' %}">Volunteer</a></li>
+            <li class="{% block about_active %}{% endblock %}"><a href="{% url 'main:about' %}">About</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -43,13 +43,13 @@
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
                 Logout</a></li>
             {% else %}
-              <li>
+              <li class="{% block new_account_active %}{% endblock %}">
                 <a href="{% url 'users:new_account' %}">
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
                   Create Account
                 </a>
               </li>
-              <li>
+              <li class="{% block login_active %}{% endblock %}">
                 <a href="{% url 'users:login' %}">
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
                   Login

@@ -76,6 +76,13 @@ body {
     background: orange;
 }
 
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: white;
+    background-color: #8d3602;
+}
+
 /* Navigation: Mobile version */
 .navbar-default .navbar-toggle {
     border-color: orange;
