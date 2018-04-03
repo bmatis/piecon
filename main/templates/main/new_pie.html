@@ -15,7 +15,14 @@
     {% bootstrap_form form %}
 
     {% buttons %}
-      <button name="submit" class="btn btn-primary">Add Pie</button>
+      <button name="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        &nbsp;Add Pie
+      </button>
+      <a name='cancel' class="btn btn-danger"
+        href="{% url 'main:pies' %}">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        &nbsp;Cancel</a>
     {% endbuttons %}
   </form>
 

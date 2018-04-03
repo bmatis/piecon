@@ -11,10 +11,12 @@ urlpatterns = [
     path('', views.index, name='index'),
 
     # Page for showing all games.
-    path('games/', views.games, name='games'),
+    # path('games/', views.games, name='games'),
+    path('games/', views.GamesView.as_view(), name='games'),
 
     # Page for showing all pies.
-    path('pies/', views.pies, name='pies'),
+    # path('pies/', views.pies, name='pies'),
+    path('pies/', views.PiesView.as_view(), name='pies'),
 
     # Page for adding a new pie.
     path('pies/new_pie/', views.new_pie, name='new_pie'),

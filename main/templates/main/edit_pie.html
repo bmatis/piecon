@@ -8,16 +8,20 @@
 {% endblock header %}
 
 {% block content %}
-<p><strong>{{user}}</strong> is bringing:</p>
+<p><strong>{{ pie.owner }}</strong> is bringing:</p>
   <form action="{% url 'main:edit_pie' pie.id %}" method="post"
     class="form">
     {% csrf_token %}
     {% bootstrap_form form %}
 
     {% buttons %}
-      <button name='submit' class="btn btn-primary">Save Changes</button>
+      <button name='submit' class="btn btn-primary">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        &nbsp;Save Changes</button>
       <a name='cancel' class="btn btn-danger"
-        href="{% url 'main:pies' %}">Cancel</a>
+        href="{% url 'main:pies' %}">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        &nbsp;Cancel</a>
     {% endbuttons %}
   </form>
 

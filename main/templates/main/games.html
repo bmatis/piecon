@@ -8,13 +8,10 @@
 
 {% block content %}
 
-
 {% if games.count == 0 %}
   <p>No games registered yet...</p>
-{% elif games.count == 1 %}
-  <p>{{ games.count }} game registered!</p>
-{% elif games.count > 1 %}
-  <p>{{ games.count }} games registered!</p>
+{% else %}
+  <p>{{ games.count }} game{{ games.count|pluralize }} registered!</p>
 {% endif %}
 
 <ul>
