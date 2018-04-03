@@ -1,6 +1,7 @@
 """Defines URL patterns for the main piecon site."""
 
 from django.urls import path
+from django.views.generic import TemplateView
 
 from . import views
 
@@ -8,7 +9,9 @@ app_name = 'main'
 
 urlpatterns = [
     # Home page
-    path('', views.index, name='index'),
+    # path('', views.index, name='index'),
+    path('', TemplateView.as_view(
+        template_name="main/index.html"), name='index'),
 
     # Page for showing all games.
     # path('games/', views.games, name='games'),
@@ -25,8 +28,12 @@ urlpatterns = [
     path('pies/edit_pie/<int:pie_id>/', views.edit_pie, name='edit_pie'),
 
     # About page
-    path('about/', views.about, name='about'),
+    # path('about/', views.about, name='about'),
+    path('about/', TemplateView.as_view(
+        template_name="main/about.html"), name='about'),
 
     # Volunteer page
-    path('volunteer/', views.volunteer, name='volunteer'),
+    #path('volunteer/', views.volunteer, name='volunteer'),
+    path('volunteer/', TemplateView.as_view(
+        template_name="main/volunteer.html"), name='volunteer'),
 ]
