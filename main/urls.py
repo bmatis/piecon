@@ -25,7 +25,7 @@ urlpatterns = [
     path('pies/new_pie/', views.new_pie, name='new_pie'),
 
     # Page for editing a pie.
-    path('pies/edit_pie/<int:pie_id>/', views.edit_pie, name='edit_pie'),
+    path('pies/<int:pie_id>/edit_pie/', views.edit_pie, name='edit_pie'),
 
     # About page
     # path('about/', views.about, name='about'),
