@@ -23,7 +23,7 @@
       <p>Number of Player: {{ game.num_players }}</p>
       <p>Length: {{ game.length }} hour(s)</p>
       <p>Description:</p>
-      <p>{{ game.description }}</p>
+      <p>{{ game.description|linebreaks }}</p>
     </li>
   {% endfor %}
 </ul>
