@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
-
+from django.utils import timezone
 from django.views import generic
 
 from .models import Pie, Game
@@ -62,6 +62,7 @@ def new_pie(request):
         if form.is_valid():
             new_pie = form.save(commit=False)
             new_pie.owner = request.user
+            new_pie.date_added = timezone.now()
             new_pie.save()
             return HttpResponseRedirect(reverse('main:pies'))
 
