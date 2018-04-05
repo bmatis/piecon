@@ -8,5 +8,12 @@ class PieAdmin(admin.ModelAdmin):
     date_hierarchy = 'date_added'
     ordering = ['-date_added']
 
+class GameAdmin(admin.ModelAdmin):
+    list_display = ('title', 'system', 'owner', 'date_added')
+    list_filter = ['date_added']
+    date_hierarchy = 'date_added'
+    ordering = ['-date_added']
+    search_fields = ['title', 'gamemaster', 'system', 'description']
+
 admin.site.register(Pie, PieAdmin)
-admin.site.register(Game)
+admin.site.register(Game, GameAdmin)
