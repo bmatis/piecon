@@ -9,6 +9,21 @@
 {% endblock header %}
 
 {% block content %}
-Game creation page is coming soon!
+
+  <form action="{% url 'main:new_game' %}" method='post' class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons %}
+      <button name="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        &nbsp;Add Game
+      </button>
+      <a name='cancel' class="btn btn-danger"
+        href="{% url 'main:games' %}">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        &nbsp;Cancel</a>
+    {% endbuttons %}
+  </form>
 
 {% endblock content %}

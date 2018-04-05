@@ -6,7 +6,7 @@ from django.utils import timezone
 from django.views import generic
 
 from .models import Pie, Game
-from .forms import PieForm
+from .forms import PieForm, GameForm
 
 current_year = 2018
 
@@ -74,7 +74,22 @@ def new_pie(request):
 @login_required
 def new_game(request):
     """Add a new game."""
-    context = {}
+
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        testing = "this is just a test"
+        form = GameForm()
+    else:
+        # POST data submitted; process data.
+        form = GameForm(request.POST)
+        if form.is_valid():
+            new_game = form.save(commit=False)
+            new_game.owner = request.user
+            new_game.date_added = timezone.now()
+            new_game.save()
+            return HttpResponseRedirect(reverse('main:games'))
+
+    context = {'form': form}
     return render(request, 'main/new_game.html', context)
 
 # DEPRECATED FUNCTIONS
