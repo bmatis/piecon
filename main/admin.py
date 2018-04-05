@@ -10,7 +10,7 @@ class PieAdmin(admin.ModelAdmin):
 
 class GameAdmin(admin.ModelAdmin):
     list_display = ('title', 'system', 'owner', 'date_added', 'is_displayed')
-    list_filter = ['date_added']
+    list_filter = ['date_added', 'owner']
     date_hierarchy = 'date_added'
     ordering = ['-date_added']
     search_fields = ['title', 'gamemaster', 'system', 'description']
