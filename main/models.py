@@ -20,7 +20,7 @@ class Game(models.Model):
     num_players = models.CharField(max_length=6)
     length = models.CharField(max_length=2)
     description = models.TextField()
-    date_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField()
 
     def __str__(self):
         """Return a string representation of the model."""
