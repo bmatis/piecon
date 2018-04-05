@@ -3,29 +3,38 @@
 {% block games_active %}active{% endblock %}
 
 {% block header %}
-  <h2>Game Registry</h2>
+  <h2>Games</h2>
+  <p>As usual, we need games. Feel free to peruse the current list of
+    registered games, and be sure to register your game today! (If you don't,
+    Pie'thulhu will be angry... Do not anger Pie'thulhu!) <em>*Alright... if you
+    don't want to run a game, you can <a href="{% url 'main:pies' %}">bring a
+    pie instead!</a></em>
+  </p>
+  <h3><a href="#" class="btn btn-primary btn-lg">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Register a new game!
+  </a></h3>
 {% endblock header %}
 
 {% block content %}
 
+<h3>Game Registry</h3>
 {% if games.count == 0 %}
   <p>No games registered yet...</p>
 {% else %}
   <p>{{ games.count }} game{{ games.count|pluralize }} registered!</p>
 {% endif %}
 
-<ul>
   {% for game in games %}
-    <li>
-      <p><strong>{{ game.title }}</strong></p>
-      <p>Run by: {{ game.gamemaster }}</p>
-      <p>System: {{ game.system }}</p>
-      <p>Number of Player: {{ game.num_players }}</p>
-      <p>Length: {{ game.length }} hour(s)</p>
-      <p>Description:</p>
-      <p>{{ game.description|linebreaks }}</p>
-    </li>
+    <div class='gameDescription'>
+      <h4>{{ game.title }}</h4>
+      <p class='meta'>Gamemaster: <strong>{{ game.gamemaster }}</strong> -
+        System: <strong>{{ game.system }}</strong> -
+        Players: <strong>{{ game.num_players }}</strong> -
+        Length: <strong>{{ game.length }} hour(s)</strong></p>
+      <p>{{ game.description|linebreaks }}
+      </p>
+    </div>
   {% endfor %}
-</ul>
 
 {% endblock content %}
