@@ -20,6 +20,9 @@ urlpatterns = [
     # Page for creating a new game.
     path('games/new_game', views.new_game, name='new_game'),
 
+    # Page for editing a game.
+    path('pies/<int:game_id>/edit_game/', views.edit_game, name='edit_game'),
+
     # Page for showing all pies.
     # path('pies/', views.pies, name='pies'),
     path('pies/', views.PiesView.as_view(), name='pies'),

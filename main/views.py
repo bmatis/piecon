@@ -92,6 +92,28 @@ def new_game(request):
     context = {'form': form}
     return render(request, 'main/new_game.html', context)
 
+@login_required
+def edit_game(request, game_id):
+    """Edit an existing game."""
+
+    game = Game.objects.get(id=game_id)
+    if game.owner != request.user:
+        raise Http404
+
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current entry.
+        form = GameForm(instance=game)
+    else:
+        # POST data submitted; process data.
+        form = GameForm(instance=game, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('main:games'))
+
+    context = {'game': game, 'form': form}
+    return render(request, 'main/edit_game.html', context)
+
+
 # DEPRECATED FUNCTIONS
 # def index(request):
 #     """The home page for the PieCon site."""

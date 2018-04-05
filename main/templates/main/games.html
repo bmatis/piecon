@@ -34,6 +34,11 @@
         Length: <strong>{{ game.length }} hour(s)</strong></p>
       <p>{{ game.description|linebreaks }}
       </p>
+      {% if game.owner == request.user %}
+      <a class="btn btn-primary btn-xs" href="{% url 'main:edit_game' game.id %}">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        edit</a></li>
+      {% endif %}
     </div>
   {% endfor %}
 

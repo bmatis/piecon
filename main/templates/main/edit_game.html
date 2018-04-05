@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% block title %}PieCon | Edit Game{% endblock title %}
+{% block games_active %}active{% endblock %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>Edit game</h2>
+{% endblock header %}
+
+{% block content %}
+
+  <form action="{% url 'main:edit_game' game.id %}" method="post"
+    class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    {% buttons %}
+      <button name='submit' class="btn btn-primary">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        &nbsp;Save Changes</button>
+      <a name='cancel' class="btn btn-danger"
+        href="{% url 'main:games' %}">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        &nbsp;Cancel</a>
+    {% endbuttons %}
+  </form>
+
+{% endblock content %}
