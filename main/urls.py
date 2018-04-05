@@ -17,6 +17,9 @@ urlpatterns = [
     # path('games/', views.games, name='games'),
     path('games/', views.GamesView.as_view(), name='games'),
 
+    # Page for creating a new game.
+    path('games/new_game', views.new_game, name='new_game'),
+
     # Page for showing all pies.
     # path('pies/', views.pies, name='pies'),
     path('pies/', views.PiesView.as_view(), name='pies'),

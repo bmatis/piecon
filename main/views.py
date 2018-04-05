@@ -71,6 +71,11 @@ def new_pie(request):
     context = {'form': form}
     return render(request, 'main/new_pie.html', context)
 
+@login_required
+def new_game(request):
+    """Add a new game."""
+    context = {}
+    return render(request, 'main/new_game.html', context)
 
 # DEPRECATED FUNCTIONS
 # def index(request):
