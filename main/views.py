@@ -16,7 +16,9 @@ class GamesView(generic.ListView):
     context_object_name = 'games'
 
     def get_queryset(self):
-        return Game.objects.filter(date_added__year=current_year).order_by('-date_added')
+        return Game.objects.filter(
+            date_added__year=current_year,
+            suppress_from_display=False).order_by('-date_added')
 
 
 class PiesView(generic.ListView):
