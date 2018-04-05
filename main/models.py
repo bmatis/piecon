@@ -24,6 +24,8 @@ class Game(models.Model):
     date_added = models.DateTimeField()
     suppress_from_display = models.BooleanField(default=False)
 
+    # Is just so the Game list on the admin site can easily show if a game will
+    # show up on the site or not.
     def is_displayed(self):
         current_year = timezone.now()
         current_year = current_year.year
