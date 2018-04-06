@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 def logout_view(request):
     """Log the user out."""
     logout(request)
+    redirect = request.POST.get('next')
+    print(redirect)
     return HttpResponseRedirect(reverse('users:login'))
 
 def new_account(request):
