@@ -50,7 +50,7 @@
                 </a>
               </li>
               <li class="{% block login_active %}{% endblock %}">
-                <a href="{% url 'users:login' %}">
+                <a href="{% url 'users:login' %}?next={{ request.path | urlencode }}">
                   <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
                   Login
                 </a>
