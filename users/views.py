@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 def logout_view(request):
@@ -35,3 +36,8 @@ def new_account(request):
 
     context = {'form': form}
     return render(request, 'users/new_account.html', context)
+
+@login_required
+def settings(request):
+    """Show the user their account settings page."""
+    return render(request, 'users/settings.html')

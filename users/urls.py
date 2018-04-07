@@ -15,5 +15,8 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
 
     # Create a new account
-    path('new_account/', views.new_account, name='new_account')
+    path('new_account/', views.new_account, name='new_account'),
+
+    # Get to the user's settings page
+    path('settings/', views.settings, name='settings'),
 ]

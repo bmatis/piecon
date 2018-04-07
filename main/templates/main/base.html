@@ -44,7 +44,7 @@
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                   &nbsp;Hello, {{ user }} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Settings</a></li>
+                  <li><a href="{% url 'users:settings' %}">Settings</a></li>
                   <li role="separator" class="divider"></li>
                   <li>
                     <a href="{% url 'users:logout' %}?next={{ request.path | urlencode }}">
