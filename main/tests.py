@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 from django.urls import reverse
 #from django.db import IntegrityError
 from datetime import timedelta
@@ -12,8 +13,13 @@ def createTestUser(username):
     Try to make a user with the given username. If they already exist, just
     return the pre-existing one.
     """
+    # TODO: refactor how I'm dealing with user creation for these tests. It's
+    # kind of kludgey right now...
     user, created = User.objects.get_or_create(
-        username=username, password='12345')
+        username=username)
+    if created:
+        user.set_password('12345')
+        user.save()
     return user
 
 def createPie(text, days, username='testuser'):
@@ -80,6 +86,95 @@ class GameModelTests(TestCase):
         """
         game = createGame(days=-5)
         self.assertEqual(game.is_displayed(), True)
+
+class GameEditViewTests(TestCase):
+    def test_cannot_access_edit_game_when_logged_out(self):
+        """
+        Trying to access edit screen for a user's game when not logged in will
+        redirect user to login page that has a next parameter for getting back
+        to edit screen after successful login.
+        """
+        # Create a new game, with default values.
+        game = createGame()
+
+        # Attempt to access edit screen for the newly created game.
+        desired_url = reverse('main:edit_game', kwargs={'game_id': game.id})
+        response = self.client.get(desired_url)
+
+        # Expect to be sent to login screen with a 'next' parameter for
+        # getting to the edit screen for the game.
+        expected_redirect = reverse('users:login') + '?next=' + desired_url
+        self.assertRedirects(response, expected_redirect, status_code=302)
+
+    def test_user_cannot_access_edit_for_another_users_game(self):
+        """
+        Trying to access edit screen for another user's game when logged in as
+        someone else should return a 404 error.
+        """
+        # Create a new game, by a user with username 'user1'
+        game = createGame(username='user1')
+
+        # Create a second user, with username 'user2'
+        user2 = createTestUser(username='user2')
+
+        # Login as user2
+        login = self.client.login(username='user2', password='12345')
+
+        # Attempt to access the edit screen for the game created by user1.
+        desired_url = reverse('main:edit_game', kwargs={'game_id': game.id})
+        response = self.client.get(desired_url)
+
+        # Expect to get a 404 error.
+        self.assertEqual(response.status_code, 404)
+
+    def test_user_can_access_edit_for_own_game(self):
+        """
+        Trying to access edit screen for your own game will work.
+        """
+        # Create a new game, by a user with username 'user1'
+        game = createGame(username='user1')
+
+        # Login as user1
+        self.client.login(username='user1', password='12345')
+
+        # Attempt to access the edit screen for the game created by user1.
+        desired_url = reverse('main:edit_game', kwargs={'game_id': game.id})
+        response = self.client.get(desired_url)
+
+        # Expect to get a success response.
+        self.assertEqual(response.status_code, 200)
+
+class GameCreateViewTests(TestCase):
+    def test_user_cannot_access_create_game_when_logged_out(self):
+        """
+        When not logged in, attempting to access the page for creating a new
+        game should result in redirect to login page with a 'next' param for
+        getting to new game page once logged in.
+        """
+        # Attempt to access creat game screen.
+        desired_url = reverse('main:new_game')
+        response = self.client.get(desired_url)
+
+        # Expect to be sent to login screen with a 'next' parameter for
+        # getting to the new game screen.
+        expected_redirect = reverse('users:login') + '?next=' + desired_url
+        self.assertRedirects(response, expected_redirect, status_code=302)
+
+    def test_user_can_access_create_game_when_logged_in(self):
+        """
+        When logged in, user can successfully access screen for creating a new
+        game.
+        """
+        # Create a test user and login as them.
+        testuser = createTestUser(username='testuser')
+        self.client.login(username='testuser', password='12345')
+
+        # Attempt to access create game screen.
+        desired_url = reverse('main:new_game')
+        response = self.client.get(desired_url)
+
+        # Expect to receive a success response.
+        self.assertEqual(response.status_code, 200)
 
 class PieModelTests(TestCase):
     def test_pie_created(self):
