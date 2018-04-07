@@ -115,11 +115,11 @@ body {
     background-color: #8d3602;
 }
 
-.navbar .navbar-nav > li.open > a:hover,
-.navbar .navbar-nav > li.open > a:focus,
-.navbar .navbar-nav > li > a:focus {
-  background-color: orange;
-  color: #fff;
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: orange;
 }
 
 .dropdown-menu > li > a:hover,
