@@ -38,15 +38,25 @@
 
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-              <li><p class="navbar-text">Hello, {{ user }}</p></li>
-              <li><a href="{% url 'users:logout' %}?next={{ request.path | urlencode }}">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;
-                Logout</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                  role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  &nbsp;Hello, {{ user }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Settings</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li>
+                    <a href="{% url 'users:logout' %}?next={{ request.path | urlencode }}">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    &nbsp;Logout</a></li>
+                </ul>
+              </li>
             {% else %}
               <li class="{% block new_account_active %}{% endblock %}">
                 <a href="{% url 'users:new_account' %}">
-                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
-                  Create Account
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  &nbsp;Create Account
                 </a>
               </li>
               <li class="{% block login_active %}{% endblock %}">
