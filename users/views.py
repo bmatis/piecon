@@ -13,6 +13,9 @@ def logout_view(request):
 
 def new_account(request):
     """Register a new user."""
+    # New account page shouldn't be available to logged in user, so check
+    # if already logged in and redirect to main index if they try to access
+    # account registration page.
     if request.user:
         return HttpResponseRedirect(reverse('main:index'))
 
