@@ -17,7 +17,7 @@ def new_account(request):
     # New account page shouldn't be available to logged in user, so check
     # if already logged in and redirect to main index if they try to access
     # account registration page.
-    if request.user:
+    if request.user.id:
         return HttpResponseRedirect(reverse('main:index'))
 
     if request.method != 'POST':
