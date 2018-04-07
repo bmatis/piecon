@@ -13,6 +13,9 @@ def logout_view(request):
 
 def new_account(request):
     """Register a new user."""
+    if request.user:
+        return HttpResponseRedirect(reverse('main:index'))
+
     if request.method != 'POST':
         # Display blank registration form.
         form = UserCreationForm()
