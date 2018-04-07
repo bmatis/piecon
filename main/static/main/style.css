@@ -89,6 +89,7 @@ body {
 
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
+  color: white;
   background: orange;
 }
 
