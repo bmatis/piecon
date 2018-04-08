@@ -1,11 +1,58 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base_custom.html' %}
 {% block title %}PieCon | Home{% endblock title %}
+{% load staticfiles %}
 
-{% block header %}
-  <h2>PieCon Site v4.0</h2>
-{% endblock header %}
+{% block page %}
+<div id="hero">
+  <div class="container">
+    <div id="hero-title">
 
-{% block content %}
-<p>An all new PieCon website experience--with responsive layout, account
-  creation, and editing of your games and pies--is coming soon!</p>
-{% endblock content %}
+      <h1>PieCon 2018 Gaming Weekend</h1>
+      <h3>PieCon XV - Pies of Future Past</h3>
+      <h2><strong>April 20th - 22nd, 2018</strong></h2>
+      <br />
+      <div id="call-to-action">
+        <a href="{% url 'main:games' %}" class="btn btn-primary btn-lg">View the Games!</a>
+        &nbsp;
+        <a href="{% url 'main:pies' %}" class="btn btn-warning btn-lg">See the Pies!</a>
+      </div> <!-- end call to action -->
+
+    </div> <!-- end hero title -->
+    <section class="visible-md visible-lg">
+      <img src="{% static 'main/images/dragon.png' %}" height="380" alt="Scary Dragon" id="hero-image">
+    </section>
+  </div> <!-- end container -->
+</div><!-- end hero -->
+
+<div id="content" class="container">
+  <div id="lead-in">
+    <h3>PieCon 2018 Gaming Weekend</h3>
+      <p class="lead">Our goal for PieCon is to have a low-stress, inexpensive gaming weekend with a community of new and old gamers that we consider friends. Because friendship is magic. And then we cast magic missile.</p>
+  </div> <!-- end lead-in -->
+
+  <div class="row">
+    <div class="col-md-4">
+      <img src="{% static 'main/images/d_and_d.jpg' %}" width="300" height="200" alt="Dungeons and Dragons 5th Edtion Starter Set">
+      <h4>Who</h4>
+      <p>YOU and YOUR FRIENDS are invited to PieCon! Which friends? The ones who game in any way, shape or fashion; the ones you like, and the ones who would have fun in a community of gamers. We don't need to know them; your good taste is enough for us.</p>
+    </div> <!-- end column -->
+
+    <div class="col-md-4">
+      <img src="{% static 'main/images/dmg.jpg' %}" width="300" height="200" alt="Dungeons and Dragons 5th Edtion DMG">
+      <h4>When</h4>
+      <p>This year's PieCon will be held from <strong>Friday, April 20th - Sunday, April 22nd, 2018</strong>. Games will start Friday evening (whenever people are ready to hold them) and go until Sunday afternoon (whenever people are ready to leave). You may attend for all or part of PieCon, whatever you like.</p>
+    </div> <!-- end column -->
+
+    <div class="col-md-4">
+      <a href="http://nocturne.binaryzac.net/" target="_blank"><img src="{% static 'main/images/map.png'%}" width="300" height="200" alt="Map thumbnail image"></a>
+
+      <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3249.8643829631787!2d-120.67936298495704!3d35.4581517497817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80ece848a36b1999%3A0x3b3e3b68d23c4a8f!2s10015+Old+Morro+Rd+E%2C+Atascadero%2C+CA+93422!5e0!3m2!1sen!2sus!4v1455680489864" width="300" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+      <h4>Where</h4>
+      <p>PieCon will take place at Nocturne:<br /><strong><a href="http://nocturne.binaryzac.net/" target="_blank">Directions and parking instructions</a></strong></p>
+
+    </div> <!-- end column -->
+  </div>
+</div><!-- end content -->
+<br />
+
+{% endblock page %}

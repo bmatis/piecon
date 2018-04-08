@@ -22,6 +22,33 @@ body {
   font-size: 3em;
 }
 
+#hero h1 {
+  font-family: 'Bangers', cursive;
+  font-size: 4em;
+}
+
+#hero {
+	color: #222;
+  background: linear-gradient(-45deg, orange, white);
+}
+
+#hero-title {
+	/* width: 600px; */
+	padding: 60px 0;
+	float: left;
+}
+
+#hero p {
+	width: 940px;
+	padding: 10px 0;
+	float: left;
+}
+
+#hero-image {
+	float: right;
+	margin: 20px 0 -40px 0;
+}
+
 /* For the game descriptions */
 .gameDescription {
 	margin: 40px 0;
