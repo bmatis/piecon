@@ -37,6 +37,13 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+            <!-- <li>
+              <p class="navbar-btn">
+                &nbsp;&nbsp;
+                <a href="https://groups.google.com/forum/#!forum/piecon" class="btn btn-default" target="_blank">Join the Google Group!</a>
+                &nbsp;&nbsp;
+             </p>
+             </li> -->
             {% if user.is_authenticated %}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
@@ -78,12 +85,29 @@
 
   </body>
 
+
+
   <footer class="footer">
-    <div class="container">
-      <span>
+
+    <div id="secondary-cta">
+    	<div class="container">
+    		<h4 class="visible-md visible-lg">Keep up to date with the latest news by joining the <strong>PieCon Google Group</strong></h4>
+    		<a href="https://groups.google.com/forum/#!forum/piecon" target="_blank" class="btn btn-lg btn-primary visible-md visible-lg">Join Now</a>
+
+        <!-- mobile version -->
+        <p class="visible-sm visible-xs">Stay up to date!</p>
+        <a href="https://groups.google.com/forum/#!forum/piecon" target="_blank" class="btn btn-md btn-primary visible-sm visible-xs">Join the Google Group</a>
+
+
+    	</div> <!-- end container -->
+    </div> <!-- end secondary cta -->
+
+    <div id="copyright">
+      <div class="container">
         Site designed and built by <strong>Brian J. Matis</strong><br>
         &copy; 2004 - {% now 'Y' %} PieCon Committee
-        </span>
+      </div>
     </div>
+
   </footer>
 </html>
