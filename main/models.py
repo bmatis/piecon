@@ -12,6 +12,13 @@ class Convention(models.Model):
 
     def __str__(self):
         """Return a string representation of the model."""
+        return "PieCon " + self.roman_num
+
+    def description(self):
+        """
+        Return a description with the tagline, like:
+        PieCon XV - Pies of Future Past
+        """
         return "PieCon " + self.roman_num + " - " + self.tagline
 
     def date_range_short(self):
@@ -71,8 +78,13 @@ class Game(models.Model):
     def is_displayed(self):
         current_year = timezone.now()
         current_year = current_year.year
-        return ((self.date_added.year == current_year) and
+        #current_con = Convention.objects.all().order_by('-start_date')[:1]
+        current_con = Convention.objects.latest('start_date')
+
+
+        return ((self.convention == current_con) and
             (self.suppress_from_display == False))
+        return current_con
 
     is_displayed.admin_order_field = 'date_added'
     is_displayed.boolean = True
