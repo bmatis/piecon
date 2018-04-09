@@ -39,3 +39,14 @@ class Game(models.Model):
     def __str__(self):
         """Return a string representation of the model."""
         return self.title
+
+class Convention(models.Model):
+    """Data model for representing a specific PieCon convention e.g. year."""
+    roman_num = models.CharField(max_length=10)
+    tagline = models.CharField(max_length=200)
+    start_date = models.DateField()
+    end_date = models.DateField()
+
+    def __str__(self):
+        """Return a string representation of the model."""
+        return "PieCon " + self.roman_num

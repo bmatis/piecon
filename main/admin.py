@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Pie, Game
+from main.models import Pie, Game, Convention
 
 class PieAdmin(admin.ModelAdmin):
     fields = ['text', 'owner', 'date_added']
@@ -17,3 +17,4 @@ class GameAdmin(admin.ModelAdmin):
 
 admin.site.register(Pie, PieAdmin)
 admin.site.register(Game, GameAdmin)
+admin.site.register(Convention)
