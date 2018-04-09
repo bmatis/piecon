@@ -67,6 +67,7 @@ def new_pie(request):
             new_pie = form.save(commit=False)
             new_pie.owner = request.user
             new_pie.date_added = timezone.now()
+            new_pie.convention = current_con
             new_pie.save()
             return HttpResponseRedirect(reverse('main:pies'))
 
@@ -88,6 +89,7 @@ def new_game(request):
             new_game = form.save(commit=False)
             new_game.owner = request.user
             new_game.date_added = timezone.now()
+            new_game.convention = current_con
             new_game.save()
             return HttpResponseRedirect(reverse('main:games'))
 
