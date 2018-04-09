@@ -9,7 +9,10 @@ from .models import Pie, Game, Convention
 from .forms import PieForm, GameForm
 
 # Get the current upcoming convention.
-current_con = Convention.objects.latest('start_date')
+try:
+    current_con = Convention.objects.latest('start_date')
+except:
+    current_con = None
 
 class GamesView(generic.ListView):
     """Page for showing all games for the current year's PieCon."""

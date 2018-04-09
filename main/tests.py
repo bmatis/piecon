@@ -8,6 +8,12 @@ from datetime import timedelta
 
 from .models import Pie, Game
 
+def createConvention():
+    """
+    Make a convention that we can assign new games and pies to.
+    """
+    
+
 def createTestUser(username):
     """
     Try to make a user with the given username. If they already exist, just
