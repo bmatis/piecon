@@ -26,8 +26,6 @@ class GamesView(generic.ListView):
     template_name = 'main/games.html'
     context_object_name = 'games'
 
-    #current_con = get_current_con()
-
     def get_queryset(self):
         return Game.objects.filter(
             convention=get_current_con(),
@@ -38,8 +36,6 @@ class PiesView(generic.ListView):
     """Page for showing all pies for the current year's PieCon."""
     template_name = 'main/pies.html'
     context_object_name = 'pies'
-
-    #current_con = get_current_con()
 
     def get_queryset(self):
         #return Pie.objects.filter(date_added__year=current_year).order_by('-date_added')
@@ -133,7 +129,6 @@ def edit_game(request, game_id):
 
 
 # DEPRECATED FUNCTIONS
-
 
 # def about(request):
 #     """The about page for the PieCon site."""
