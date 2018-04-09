@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+import datetime
 
 class Pie(models.Model):
     """Data model for Pies/Snacks"""
@@ -50,3 +51,31 @@ class Convention(models.Model):
     def __str__(self):
         """Return a string representation of the model."""
         return "PieCon " + self.roman_num + " - " + self.tagline
+
+    def date_range_short(self):
+        """
+        Return timerange of convention in format like: April 20 - 22, 2018
+        """
+        start = self.start_date.strftime('%B %d')
+
+        # check if end date in same month as start date and don't repeat the
+        # month twice. Otherwise, show the end date's month as well.
+        if self.end_date.month == self.start_date.month:
+            end = self.end_date.strftime('%d')
+        else:
+            end = self.end_date.strftime('%B %d')
+
+        year = self.end_date.strftime('%Y')
+        timerange = start + " - " + end + ", " + year
+        return timerange
+
+    def date_range_long(self):
+        """
+        Return timerange of convention that includes the day of the week, like:
+        Friday, April 20 - Sunday, April 22, 2018
+        """
+        start = self.start_date.strftime('%A, %B %d')
+        end = self.end_date.strftime('%A, %B %d')
+        year = self.end_date.strftime('%Y')
+        timerange = start + " - " + end + ", " + year
+        return timerange
