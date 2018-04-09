@@ -9,9 +9,7 @@ app_name = 'main'
 
 urlpatterns = [
     # Home page
-    # path('', views.index, name='index'),
-    path('', TemplateView.as_view(
-        template_name="main/index.html"), name='index'),
+    path('', views.index, name='index'),
 
     # Page for showing all games.
     # path('games/', views.games, name='games'),

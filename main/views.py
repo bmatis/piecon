@@ -8,20 +8,29 @@ from django.views import generic
 from .models import Pie, Game, Convention
 from .forms import PieForm, GameForm
 
-# Get the current upcoming convention.
-try:
-    current_con = Convention.objects.latest('start_date')
-except:
-    current_con = None
+def get_current_con():
+    # Get the current upcoming convention.
+    try:
+        return Convention.objects.latest('start_date')
+    except:
+        return None
+
+def index(request):
+    """The home page for the PieCon site."""
+    current_con = get_current_con()
+    context = {'current_con': current_con}
+    return render(request, 'main/index.html', context)
 
 class GamesView(generic.ListView):
     """Page for showing all games for the current year's PieCon."""
     template_name = 'main/games.html'
     context_object_name = 'games'
 
+    #current_con = get_current_con()
+
     def get_queryset(self):
         return Game.objects.filter(
-            convention=current_con,
+            convention=get_current_con(),
             suppress_from_display=False).order_by('-date_added')
 
 
@@ -30,9 +39,11 @@ class PiesView(generic.ListView):
     template_name = 'main/pies.html'
     context_object_name = 'pies'
 
+    #current_con = get_current_con()
+
     def get_queryset(self):
         #return Pie.objects.filter(date_added__year=current_year).order_by('-date_added')
-        return Pie.objects.filter(convention=current_con).order_by('-date_added')
+        return Pie.objects.filter(convention=get_current_con()).order_by('-date_added')
 
 
 @login_required
@@ -70,7 +81,7 @@ def new_pie(request):
             new_pie = form.save(commit=False)
             new_pie.owner = request.user
             new_pie.date_added = timezone.now()
-            new_pie.convention = current_con
+            new_pie.convention = get_current_con()
             new_pie.save()
             return HttpResponseRedirect(reverse('main:pies'))
 
@@ -92,7 +103,7 @@ def new_game(request):
             new_game = form.save(commit=False)
             new_game.owner = request.user
             new_game.date_added = timezone.now()
-            new_game.convention = current_con
+            new_game.convention = get_current_con()
             new_game.save()
             return HttpResponseRedirect(reverse('main:games'))
 
@@ -122,9 +133,7 @@ def edit_game(request, game_id):
 
 
 # DEPRECATED FUNCTIONS
-# def index(request):
-#     """The home page for the PieCon site."""
-#     return render(request, 'main/index.html')
+
 
 # def about(request):
 #     """The about page for the PieCon site."""
