@@ -4,7 +4,7 @@ from main.models import Pie, Game, Convention
 class PieAdmin(admin.ModelAdmin):
     fields = ['text', 'owner', 'date_added', 'convention']
     list_display = ('text', 'owner', 'convention', 'date_added')
-    list_filter = ['date_added']
+    list_filter = ['convention', 'date_added']
     date_hierarchy = 'date_added'
     ordering = ['-date_added']
 
