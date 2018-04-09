@@ -15,6 +15,10 @@ class GameAdmin(admin.ModelAdmin):
     ordering = ['-date_added']
     search_fields = ['title', 'gamemaster', 'system', 'description']
 
+class ConventionAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'start_date', 'end_date')
+    ordering = ['-start_date']
+
 admin.site.register(Pie, PieAdmin)
 admin.site.register(Game, GameAdmin)
-admin.site.register(Convention)
+admin.site.register(Convention, ConventionAdmin)

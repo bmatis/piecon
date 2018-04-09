@@ -49,4 +49,4 @@ class Convention(models.Model):
 
     def __str__(self):
         """Return a string representation of the model."""
-        return "PieCon " + self.roman_num
+        return "PieCon " + self.roman_num + " - " + self.tagline
