@@ -5,10 +5,11 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.views import generic
 
-from .models import Pie, Game
+from .models import Pie, Game, Convention
 from .forms import PieForm, GameForm
 
-current_year = 2018
+# Get the current upcoming convention.
+current_con = Convention.objects.all().order_by('-start_date')[:1]
 
 class GamesView(generic.ListView):
     """Page for showing all games for the current year's PieCon."""
@@ -17,7 +18,7 @@ class GamesView(generic.ListView):
 
     def get_queryset(self):
         return Game.objects.filter(
-            date_added__year=current_year,
+            convention=current_con,
             suppress_from_display=False).order_by('-date_added')
 
 
@@ -27,7 +28,8 @@ class PiesView(generic.ListView):
     context_object_name = 'pies'
 
     def get_queryset(self):
-        return Pie.objects.filter(date_added__year=current_year).order_by('-date_added')
+        #return Pie.objects.filter(date_added__year=current_year).order_by('-date_added')
+        return Pie.objects.filter(convention=current_con).order_by('-date_added')
 
 
 @login_required
