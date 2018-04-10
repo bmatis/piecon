@@ -19,9 +19,11 @@
 {% block content %}
 
 {% if pies.count == 0 %}
-  <p>No pies registered yet...</p>
+  <p>No pies registered yet for PieCon {{ current_con.roman_num }}...</p>
 {% else %}
-  <p>{{ pies.count }} pie{{ pies.count|pluralize }} registered!</p>
+  <p>{{ pies.count }} pie{{ pies.count|pluralize }} registered for PieCon
+    {{ current_con.roman_num }}!
+  </p>
 {% endif %}
 
 <ul>

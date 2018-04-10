@@ -31,6 +31,14 @@ class GamesView(generic.ListView):
             convention=get_current_con(),
             suppress_from_display=False).order_by('-date_added')
 
+    def get_context_data(self, **kwargs):
+        """For passing current convention info to the ListView."""
+        # Call the base implementation first to get the context
+        context = super(GamesView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['current_con'] = get_current_con()
+        return context
+
 
 class PiesView(generic.ListView):
     """Page for showing all pies for the current year's PieCon."""
@@ -40,6 +48,14 @@ class PiesView(generic.ListView):
     def get_queryset(self):
         #return Pie.objects.filter(date_added__year=current_year).order_by('-date_added')
         return Pie.objects.filter(convention=get_current_con()).order_by('-date_added')
+
+    def get_context_data(self, **kwargs):
+        """For passing current convention info to the ListView."""
+        # Call the base implementation first to get the context
+        context = super(PiesView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+        context['current_con'] = get_current_con()
+        return context
 
 
 @login_required

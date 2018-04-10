@@ -20,9 +20,11 @@
 
 <h3>Game Registry</h3>
 {% if games.count == 0 %}
-  <p>No games registered yet...</p>
+  <p>No games registered yet for PieCon {{ current_con.roman_num }}...</p>
 {% else %}
-  <p>{{ games.count }} game{{ games.count|pluralize }} registered!</p>
+  <p>{{ games.count }} game{{ games.count|pluralize }} registered for PieCon
+    {{ current_con.roman_num }}!
+  </p>
 {% endif %}
 
   {% for game in games %}
