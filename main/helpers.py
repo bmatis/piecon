@@ -15,6 +15,6 @@ def ordinal(num):
         return 'th'
 
 def get_num_with_ordinal(num):
-    """Displays a int along with its ordinal, e.g. 1st, 3rd, 28th, 101st"""
+    """Displays an int along with its ordinal, e.g. 1st, 3rd, 28th, 101st"""
     num_with_ordinal = str(num) + ordinal(num)
     return num_with_ordinal
