@@ -76,15 +76,10 @@ class Game(models.Model):
     # Is just so the Game list on the admin site can easily show if a game will
     # show up on the site or not.
     def is_displayed(self):
-        current_year = timezone.now()
-        current_year = current_year.year
-        #current_con = Convention.objects.all().order_by('-start_date')[:1]
         current_con = Convention.objects.latest('start_date')
-
 
         return ((self.convention == current_con) and
             (self.suppress_from_display == False))
-        return current_con
 
     is_displayed.admin_order_field = 'date_added'
     is_displayed.boolean = True
