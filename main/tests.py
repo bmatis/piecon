@@ -6,13 +6,22 @@ from django.urls import reverse
 #from django.db import IntegrityError
 from datetime import timedelta
 
-from .models import Pie, Game
+from .models import Pie, Game, Convention
 
-def createConvention():
+def createConvention(roman_num='I', tagline="Tagline", days=0):
     """
-    Make a convention that we can assign new games and pies to.
+    Make a convention that we can assign new games and pies to. Times based on
+    the given 'days' offset, use negative value to be in the past, positive
+    to be in the future.
     """
-    
+    start_date = timezone.now() + timedelta(days=days)
+    end_date = start_date + timedelta(days=3)
+    convention = Convention.objects.create(
+        roman_num=roman_num,
+        tagline=tagline,
+        start_date=start_date,
+        end_date=end_date)
+    return convention
 
 def createTestUser(username):
     """
@@ -55,7 +64,16 @@ def createGame(title='Test Game', gamemaster='GM', system='Game System',
         description=description, date_added=time)
     return game
 
+class ConventionModelTests(TestCase):
+    def test_create_convention(self):
+        new_convention = createConvention()
+        self.assertEqual(new_convention.tagline, 'Tagline')
+
 class GameModelTests(TestCase):
+    def setUp(self):
+        old_con = createConvention(roman_num='I', tagline="OldCon", days=-365)
+        current_con = createConvention(roman_num='II', tagline="NewCon", days=10)
+
     def test_game_created(self):
         """A new game can be created."""
         game = createGame()
@@ -68,29 +86,37 @@ class GameModelTests(TestCase):
         game.title = "edited game title"
         self.assertEqual(game.title, 'edited game title')
 
-    def test_is_displayed_when_game_suppressed(self):
+    def test_is_displayed_function_when_game_suppressed(self):
         """
         A game can be set to suppressed and then the is_displayed() method
         will return False.
         """
         game = createGame()
+        current_con = Convention.objects.latest('start_date')
+        game.convention = current_con
         game.suppress_from_display = True
         self.assertEqual(game.is_displayed(), False)
 
-    def test_is_displayed_when_game_is_old(self):
+    def test_is_displayed_function_when_game_is_old(self):
         """
-        A game that was submitted over a year ago will have its is_displayed()
+        A game that was part of an old convention will have its is_displayed()
         method return False.
         """
         game = createGame(days=-367)
+        old_con = Convention.objects.get(roman_num='I')
+        game.convention = old_con
+        self.assertEqual(game.convention.roman_num, 'I')
+        self.assertEqual(Convention.objects.latest('start_date').roman_num, 'II')
         self.assertEqual(game.is_displayed(), False)
 
-    def test_is_displayed_for_new_game(self):
+    def test_is_displayed_function_for_new_game(self):
         """
         A game that is newly created will have its is_displayed() method return
         True.
         """
-        game = createGame(days=-5)
+        game = createGame()
+        current_con = Convention.objects.latest('start_date')
+        game.convention = current_con
         self.assertEqual(game.is_displayed(), True)
 
 class GameEditViewTests(TestCase):
@@ -183,6 +209,10 @@ class GameCreateViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
 class PieModelTests(TestCase):
+    def setUp(self):
+        old_con = createConvention(roman_num='I', tagline="OldCon", days=-365)
+        current_con = createConvention(roman_num='II', tagline="NewCon", days=10)
+
     def test_pie_created(self):
         """A new pie can be created."""
         pie = createPie(text='test pie', days=0)
@@ -196,6 +226,10 @@ class PieModelTests(TestCase):
         self.assertEqual(pie.text, 'edited pie')
 
 class PieListViewTests(TestCase):
+    def setUp(self):
+        old_con = createConvention(roman_num='I', tagline="OldCon", days=-365)
+        current_con = createConvention(roman_num='II', tagline="NewCon", days=10)
+
     def test_no_pies(self):
         """If no pies exist, an appropriate message is displayed."""
         response = self.client.get(reverse('main:pies'))
@@ -205,9 +239,14 @@ class PieListViewTests(TestCase):
 
     def test_old_pie_does_not_appear(self):
         """
-        If only a pie from last year exists, it doesn't appear on the pies list.
+        If only a pie from a prior con exists, the pie list is empty.
         """
+        old_con = Convention.objects.get(roman_num='I')
+
         old_pie = createPie(text='old pie', days=-365)
+        old_pie.convention = old_con
+        old_pie.save()
+
         response = self.client.get(reverse('main:pies'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No pies registered yet")
@@ -218,6 +257,9 @@ class PieListViewTests(TestCase):
         If a pie from the current year exists, it appears on the pie list.
         """
         new_pie = createPie(text='new pie', days=0)
+        new_pie.convention = Convention.objects.latest('start_date')
+        new_pie.save()
+
         response = self.client.get(reverse('main:pies'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response,
@@ -230,7 +272,14 @@ class PieListViewTests(TestCase):
         """
         pie1 = createPie(text='pie1', days=-5)
         pie2 = createPie(text='pie2', days=0, username='different_user')
+        current_con = Convention.objects.latest('start_date')
+        pie1.convention = current_con
+        pie2.convention = current_con
+        pie1.save()
+        pie2.save()
+
         response = self.client.get(reverse('main:pies'))
+
         self.assertEqual(response.status_code, 200)
         self.assertContains(response,
             "<strong>testuser</strong> is bringing <strong>pie1</strong>")
