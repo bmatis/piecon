@@ -1,0 +1,2 @@
+This file only exists to ensure that the piecon/static/ directory is built
+on Heroku.
