@@ -27,16 +27,18 @@ class Convention(models.Model):
         """
         Return timerange of convention in format like: April 20th - 22nd, 2018
         """
-        start = self.start_date.strftime('%B %d') + ordinal(self.start_date.day)
+        sd = self.start_date
+        ed = self.end_date
+        start = sd.strftime('%B') + " " + get_num_with_ordinal(sd.day)
 
         # check if end date in same month as start date and don't repeat the
         # month twice. Otherwise, show the end date's month as well.
-        if self.end_date.month == self.start_date.month:
+        if ed.month == sd.month:
             end = get_num_with_ordinal(self.end_date.day)
         else:
-            end = self.end_date.strftime('%B %d') + ordinal(self.end_date.day)
+            end = ed.strftime('%B') + " " + get_num_with_ordinal(ed.day)
 
-        year = self.end_date.strftime('%Y')
+        year = ed.strftime('%Y')
         timerange = start + " - " + end + ", " + year
         return timerange
 
@@ -45,9 +47,10 @@ class Convention(models.Model):
         Return timerange of convention that includes the day of the week, like:
         Friday, April 20th - Sunday, April 22nd, 2018
         """
-        start = (self.start_date.strftime('%A, %B %d') +
-            ordinal(self.start_date.day))
-        end = self.end_date.strftime('%A, %B %d') + ordinal(self.end_date.day)
+        sd = self.start_date
+        ed = self.end_date
+        start = sd.strftime('%A, %B') + " " + get_num_with_ordinal(sd.day)
+        end = ed.strftime('%A, %B') + " " + get_num_with_ordinal(ed.day)
         year = self.end_date.strftime('%Y')
         timerange = start + " - " + end + ", " + year
         return timerange

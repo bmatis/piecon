@@ -40,7 +40,7 @@
     <div class="col-md-4">
       <img src="{% static 'main/images/dmg.jpg' %}" width="300" height="200" alt="Dungeons and Dragons 5th Edtion DMG">
       <h4>When</h4>
-      <p>This year's PieCon will be held from <strong>{{ current_con.date_range_long }}</strong>. Games will start Friday evening (whenever people are ready to hold them) and go until Sunday afternoon (whenever people are ready to leave). You may attend for all or part of PieCon, whatever you like.</p>
+      <p>This year's PieCon will be held from <strong>{{ current_con.date_range_long }}</strong>. Games will start {{ current_con.start_date | date:"l" }} evening (whenever people are ready to hold them) and go until {{ current_con.end_date | date:"l" }} afternoon (whenever people are ready to leave). You may attend for all or part of PieCon, whatever you like.</p>
     </div> <!-- end column -->
 
     <div class="col-md-4">
