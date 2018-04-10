@@ -54,7 +54,8 @@ class Pie(models.Model):
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    convention = models.ForeignKey(Convention, on_delete=models.SET_NULL, blank=True, null=True)
+    convention = models.ForeignKey(Convention, on_delete=models.SET_NULL,
+        blank=True, null=True)
 
     def __str__(self):
         """Return a string representation of the model."""
@@ -71,7 +72,8 @@ class Game(models.Model):
     description = models.TextField()
     date_added = models.DateTimeField()
     suppress_from_display = models.BooleanField(default=False)
-    convention = models.ForeignKey(Convention, on_delete=models.SET_NULL, blank=True, null=True)
+    convention = models.ForeignKey(Convention, on_delete=models.SET_NULL,
+        blank=True, null=True)
 
     # Is just so the Game list on the admin site can easily show if a game will
     # show up on the site or not.
