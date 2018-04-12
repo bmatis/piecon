@@ -14,4 +14,4 @@ Unlike the old PHP-based spaghetti code version currently in use, this version i
 * Unit tests!
 
 ### Note:
-_While this current version has the bulk of core functionality, development is still in-progress and, most significantly, not yet configured for a production deploy._
+_While this current version has the bulk of core functionality, development is still in-progress and several must-have features are not yet ready._
