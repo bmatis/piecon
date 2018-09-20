@@ -60,6 +60,7 @@ class Pie(models.Model):
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    person_name = models.CharField(max_length=200)
     convention = models.ForeignKey(Convention, on_delete=models.SET_NULL,
         blank=True, null=True)
 

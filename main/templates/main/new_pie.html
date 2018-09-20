@@ -9,7 +9,6 @@
 {% endblock header %}
 
 {% block content %}
-<p><strong>{{user}}</strong> is bringing:</p>
   <form action="{% url 'main:new_pie' %}" method='post' class="form">
     {% csrf_token %}
     {% bootstrap_form form %}

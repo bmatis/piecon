@@ -5,8 +5,20 @@ from .models import Pie, Game
 class PieForm(forms.ModelForm):
     class Meta:
         model = Pie
-        fields = ['text']
-        labels = {'text': ''}
+        fields = [
+            'person_name',
+            'text'
+            ]
+        labels = {
+            'person_name': 'Your Name',
+            'text': 'Pie (or snack)'
+            }
+        widgets =  {
+            'person_name': forms.TextInput(attrs={'placeholder':
+                'Who are you?'}),
+            'text': forms.TextInput(attrs={'placeholder':
+                'What pie or snack are you bringing?'})
+        }
 
 class GameForm(forms.ModelForm):
     class Meta:

@@ -8,7 +8,6 @@
 {% endblock header %}
 
 {% block content %}
-<p><strong>{{ pie.owner }}</strong> is bringing:</p>
   <form action="{% url 'main:edit_pie' pie.id %}" method="post"
     class="form">
     {% csrf_token %}
