@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from .forms import SignUpForm
 
 
 def logout_view(request):
@@ -22,10 +23,10 @@ def new_account(request):
 
     if request.method != 'POST':
         # Display blank registration form.
-        form = UserCreationForm()
+        form = SignUpForm()
     else:
         # Process completed form.
-        form = UserCreationForm(data=request.POST)
+        form = SignUpForm(data=request.POST)
         if form.is_valid():
             new_user = form.save()
             # Log the user in and then redirect to home page.
