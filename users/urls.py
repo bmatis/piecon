@@ -19,4 +19,7 @@ urlpatterns = [
 
     # Get to the user's settings page
     path('settings/', views.settings, name='settings'),
+
+    # Get to the user's change password page
+    path('change_password/', views.change_password, name='change_password'),
 ]

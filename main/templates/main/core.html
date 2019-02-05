@@ -54,9 +54,9 @@
                   &nbsp;Hello, {{ user }} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="{% url 'users:settings' %}">
-                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-                    &nbsp;Settings</a></li>
+                    <a href="{% url 'users:change_password' %}">
+                    <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                    &nbsp;Change Password</a></li>
                   <li role="separator" class="divider"></li>
                   <li>
                     <a href="{% url 'users:logout' %}?next={{ request.path | urlencode }}">
