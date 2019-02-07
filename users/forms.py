@@ -18,7 +18,10 @@ class SignUpForm(UserCreationForm):
             raise forms.ValidationError(self.fields['email'].error_messages['exists'])
         return email
 
-class EmailEditForm(UserChangeForm):
+class EmailEditForm(forms.ModelForm):
+
+    email = forms.EmailField(max_length=254, label='Email Address')
+
     class Meta:
         model = User
-        fields = ('email', 'password')
+        fields = ('email',)
