@@ -22,4 +22,7 @@ urlpatterns = [
 
     # Get to the user's change password page
     path('change_password/', views.change_password, name='change_password'),
+
+    # Get to the user's edit email address page
+    path('edit_email/', views.edit_email, name='edit_email'),
 ]

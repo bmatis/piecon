@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm
+from .forms import SignUpForm, EmailEditForm
 
 
 def logout_view(request):
@@ -51,7 +51,6 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            #return redirect('change_password')
             return HttpResponseRedirect(reverse('users:change_password'))
 
         else:
@@ -64,3 +63,21 @@ def change_password(request):
 def settings(request):
     """Show the user their account settings page."""
     return render(request, 'users/settings.html')
+
+@login_required
+def edit_email(request):
+    """Allow user to change their email address."""
+    if request.method != 'POST':
+        form = EmailEditForm(instance=request.user)
+    else:
+        form = EmailEditForm(request.POST, instance=request.user)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, 'Your email was successfully updated!')
+            return HttpResponseRedirect(reverse('users:edit_email'))
+
+        else:
+            messages.error(request, 'Please correct the error(s) below.')
+
+    context = {'form': form}
+    return render(request, 'users/edit_email.html', context)

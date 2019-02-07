@@ -57,6 +57,10 @@
                     <a href="{% url 'users:change_password' %}">
                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
                     &nbsp;Change Password</a></li>
+                  <li>
+                    <a href="{% url 'users:edit_email' %}">
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    &nbsp;Edit Email Address</a></li>
                   <li role="separator" class="divider"></li>
                   <li>
                     <a href="{% url 'users:logout' %}?next={{ request.path | urlencode }}">

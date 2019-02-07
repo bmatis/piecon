@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 
 class SignUpForm(UserCreationForm):
@@ -17,3 +17,8 @@ class SignUpForm(UserCreationForm):
         if User.objects.filter(email=email).exists():
             raise forms.ValidationError(self.fields['email'].error_messages['exists'])
         return email
+
+class EmailEditForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ('email', 'password')
