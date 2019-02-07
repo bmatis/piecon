@@ -40,7 +40,8 @@
         </div>
       </div>
       <p class="text-center">
-        <a href="#" class="pop" data-toggle="popover" data-placement="top" data-trigger="hover focus" title="Not implemented yet" data-content="But it's coming soon!">Forgot password</a>
+        <!-- <a href="#" class="pop" data-toggle="popover" data-placement="top" data-trigger="hover focus" title="Not implemented yet" data-content="But it's coming soon!">Forgot password</a> -->
+        <a href="{% url 'password_reset' %}">Forgot password</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <a href="{% url 'users:new_account' %}">Make an account</a>
       </p>

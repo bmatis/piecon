@@ -137,6 +137,8 @@ BOOTSTRAP3 = {
     'include_jquery': True,
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+
 # Heroku settings for production
 cwd = os.getcwd()
 if cwd == '/app' or cwd[:4] == '/tmp':
