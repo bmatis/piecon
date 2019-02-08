@@ -178,3 +178,4 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     EMAIL_PORT = os.environ.get('MAILGUN_SMTP_PORT', '')
     EMAIL_HOST_USER = os.environ.get('MAILGUN_SMTP_LOGIN', '')
     EMAIL_HOST_PASSWORD = os.environ.get('MAILGUN_SMTP_PASSWORD', '')
+    DEFAULT_FROM_EMAIL = 'PieCon <no-reply@piecon.com>'
