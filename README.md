@@ -12,6 +12,3 @@ Unlike the old PHP-based spaghetti code version currently in use, this version i
 * Fixed position site navigation bar
 * Admin tool
 * Unit tests!
-
-### Note:
-_While this current version has the bulk of core functionality, development is still in-progress and several must-have features are not yet ready._
