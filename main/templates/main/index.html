@@ -9,7 +9,8 @@
 
       <h1>PieCon {{ current_con.start_date.year }} Gaming Weekend</h1>
       <h3>{{ current_con.description }}</h3>
-      <h2><strong>{{ current_con.date_range_short }}</strong></h2>
+      <!--<h2><strong>{{ current_con.date_range_short }}</strong></h2>-->
+      <h2><strong>POSTPONED - DATE TBD!</strong></h2>
       <br />
       <div id="call-to-action">
         <a href="{% url 'main:games' %}" class="btn btn-primary btn-lg">View the Games!</a>
@@ -40,7 +41,8 @@
     <div class="col-md-4">
       <img src="{% static 'main/images/dmg.jpg' %}" width="300" height="200" alt="Dungeons and Dragons 5th Edtion DMG">
       <h4>When</h4>
-      <p>This year's PieCon will be held from <strong>{{ current_con.date_range_long }}</strong>. Games will start {{ current_con.start_date | date:"l" }} evening at 5pm and go until 5pm {{ current_con.end_date | date:"l" }}. You may attend for all or part of PieCon, whatever you like.</p>
+      <p>THIS YEAR'S PIECON IS TEMPORARILY POSTPONED! DATE TBD! STAY TUNED!
+      <!--<p>This year's PieCon will be held from <strong>{{ current_con.date_range_long }}</strong>. Games will start {{ current_con.start_date | date:"l" }} evening at 5pm and go until 5pm {{ current_con.end_date | date:"l" }}. You may attend for all or part of PieCon, whatever you like.</p>-->
     </div> <!-- end column -->
 
     <div class="col-md-4">
